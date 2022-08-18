@@ -17,7 +17,7 @@ namespace AHT10
     {
         uint8_t command = 0b10101100;
         I2C::ByteVec data{command, 0b00110011, 0};
-        Measurement::Result result{0.0, 0.0, Measurement::MEASUREMENT_OK};
+        Measurement::Result result{0.0, 0.0, Measurement::MEASUREMENT_OK, SensorStatus{0}};
 
         auto writeStatus = i2c_->write(data);
         if (writeStatus != I2C::WRITE_OK)
@@ -36,6 +36,8 @@ namespace AHT10
             result.status = Measurement::MEASUREMENT_ERROR;
             return result;
         }
+
+        result.sensorStatus = SensorStatus{readResult.data[0]};
 
         uint32_t sHumidity = readResult.data[1] << 16 | readResult.data[2] << 8 | readResult.data[3];
         sHumidity >>= 4;

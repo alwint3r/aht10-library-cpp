@@ -6,23 +6,6 @@
 
 namespace AHT10
 {
-
-    namespace Measurement
-    {
-        enum Status
-        {
-            MEASUREMENT_OK,
-            MEASUREMENT_ERROR,
-        };
-
-        struct Result
-        {
-            double temperature;
-            double humidity;
-            Status status;
-        };
-    } // namespace Measurement
-
     enum SensorWorkingMode
     {
         WORKING_MODE_NOR,
@@ -44,6 +27,22 @@ namespace AHT10
     private:
         uint8_t statusByte_;
     };
+    namespace Measurement
+    {
+        enum Status
+        {
+            MEASUREMENT_OK,
+            MEASUREMENT_ERROR,
+        };
+
+        struct Result
+        {
+            double temperature;
+            double humidity;
+            Status status;
+            SensorStatus sensorStatus;
+        };
+    } // namespace Measurement
 
     class Sensor
     {
