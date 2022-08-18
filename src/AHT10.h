@@ -23,6 +23,14 @@ namespace AHT10
         };
     } // namespace Measurement
 
+    enum SensorWorkingMode
+    {
+        WORKING_MODE_NOR,
+        WORKING_MODE_CYC,
+        WORKING_MODE_CMD,
+        WORKING_MODE_UNKNOWN,
+    };
+
     class SensorStatus
     {
     public:
@@ -35,14 +43,6 @@ namespace AHT10
         bool isCalibrationEnabled();
     private:
         uint8_t statusByte_;
-    };
-
-    enum SensorWorkingMode
-    {
-        WORKING_MODE_NOR,
-        WORKING_MODE_CYC,
-        WORKING_MODE_CMD,
-        WORKING_MODE_UNKNOWN,
     };
 
     class Sensor
