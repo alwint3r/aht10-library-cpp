@@ -38,10 +38,13 @@ void loop()
     {
         if (res.sensorStatus.isBusy())
         {
-            Serial.printf("Sensor is busy!");
+            Serial.println("Sensor is busy!");
         }
 
-        Serial.printf("Temperature: %f, Humidity: %f\r\n", res.temperature, res.humidity);
+        Serial.print("Temperature: ");
+        Serial.print(res.temperature);
+        Serial.print(", Humidity: ");
+        Serial.println(res.humidity);
     }
     delay(1000);
 }
