@@ -40,9 +40,9 @@ namespace AHT10
 
         WriteStatus Arduino::write(const uint8_t *data, size_t length)
         {
-            Wire.beginTransmission(addr_);
-            Wire.write(data, length);
-            auto res = Wire.endTransmission();
+            wire_->beginTransmission(addr_);
+            wire_->write(data, length);
+            auto res = wire_->endTransmission();
 
             return translateWriteStatus(res);
         }
