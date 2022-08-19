@@ -50,6 +50,12 @@ namespace AHT10
         return result;
     }
 
+    void Sensor::reset()
+    {
+        I2C::ByteVec cmd{0b10111010};
+        i2c_->write(cmd);
+    }
+
     SensorStatus::SensorStatus(uint8_t statusByte) : statusByte_(statusByte) {}
 
     SensorWorkingMode SensorStatus::getWorkingMode()
