@@ -34,7 +34,7 @@ void setup()
 void loop()
 {
     auto res = sensor.measure();
-    if (res.status == AHT10::Measurement::MEASUREMENT_OK)
+    if (res.isOk())
     {
         if (res.sensorStatus.isBusy())
         {

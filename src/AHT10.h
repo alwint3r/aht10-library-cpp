@@ -41,6 +41,11 @@ namespace AHT10
             double humidity;
             Status status;
             SensorStatus sensorStatus;
+
+            bool isOk()
+            {
+                return status == MEASUREMENT_OK;
+            }
         };
     } // namespace Measurement
 
