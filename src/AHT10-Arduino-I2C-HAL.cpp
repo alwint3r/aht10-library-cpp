@@ -32,42 +32,39 @@ namespace AHT10
         WriteStatus Arduino::write(ByteVec data)
         {
             wire_->beginTransmission(addr_);
-
-            for (auto datum : data)
-            {
-                wire_->write(datum);
-            }
-
+            wire_->write(data.data(), data.size());
             auto res = wire_->endTransmission();
-            if (res == 0)
+
+            return translateWriteStatus(res);
+        }
+
+        WriteStatus Arduino::write(const uint8_t *data, size_t length)
+        {
+            Wire.beginTransmission(addr_);
+            Wire.write(data, length);
+            auto res = Wire.endTransmission();
+
+            return translateWriteStatus(res);
+        }
+
+        WriteStatus Arduino::translateWriteStatus(int writeStatus)
+        {
+            if (writeStatus == 0)
             {
                 return WRITE_OK;
             }
 
-            if (res == 2)
+            if (writeStatus == 2)
             {
                 return WRITE_FAILURE;
             }
 
-            if (res == 5)
+            if (writeStatus == 5)
             {
                 return WRITE_TIMEOUT;
             }
 
             return WRITE_ERROR_UNKNOWN;
-        }
-
-        WriteStatus Arduino::write(const uint8_t *data, size_t length)
-        {
-            ByteVec vec;
-            vec.reserve(length);
-
-            for (auto i = 0; i < length; i++)
-            {
-                vec.push_back(data[i]);
-            }
-
-            return write(vec);
         }
     }
 }

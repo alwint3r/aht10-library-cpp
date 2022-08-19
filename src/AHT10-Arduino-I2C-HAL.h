@@ -20,6 +20,8 @@ namespace AHT10
             virtual WriteStatus write(ByteVec data);
             virtual WriteStatus write(const uint8_t *data, size_t length);
         private:
+            WriteStatus translateWriteStatus(int writeStatus);
+        private:
             TwoWire *wire_;
             uint8_t addr_;
         };
